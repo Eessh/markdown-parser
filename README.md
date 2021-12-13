@@ -2,6 +2,12 @@
 A simple tool to parse the Mardown and, convert it to HTML.
 
 #### TODO
+- [x] Headings
+- [x] Bold
+- [x] Italic
+- [x] Strikethrough
+- [x] Inline Code
+- [ ] Multiline Code
 - [ ] Lists
 - [ ] Links
 - [ ] Tables
