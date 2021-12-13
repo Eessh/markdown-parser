@@ -1,6 +1,11 @@
 # Markdown Parser
 A simple tool to parse the Mardown and, convert it to HTML.
 
+#### TODO
+- [ ] Lists
+- [ ] Links
+- [ ] Tables
+
 #### To run locally:
 ```bash
 git clone https://github.com/Eessh/markdown-parser.git
