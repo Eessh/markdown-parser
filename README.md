@@ -5,11 +5,15 @@ A simple tool to parse the Mardown and, convert it to HTML.
 - [x] Headings
 - [x] Bold
 - [x] Italic
+- [x] Nested Bold and Italic
+- [ ] All Bold and Italic
 - [x] Strikethrough
 - [x] Inline Code
 - [ ] Multiline Code
+- [ ] Quote
 - [ ] Lists
 - [ ] Links
+- [ ] Images
 - [ ] Tables
 
 #### To run locally:
