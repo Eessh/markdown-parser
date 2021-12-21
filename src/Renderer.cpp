@@ -45,16 +45,45 @@ string Renderer::recursiveASTRenderer(const AbstractSyntaxTreeNode* node) {
 	for (AbstractSyntaxTreeNode* child: node->_children) {
 		childrenStr.append(recursiveASTRenderer(child));
 	}
-	if (node->_token->_type == HEADING1) surroundHeadingTags(childrenStr, 1);
-	else if (node->_token->_type == HEADING2) surroundHeadingTags(childrenStr, 2);
-	else if (node->_token->_type == HEADING3) surroundHeadingTags(childrenStr, 3);
-	else if (node->_token->_type == HEADING4) surroundHeadingTags(childrenStr, 4);
-	else if (node->_token->_type == HEADING5) surroundHeadingTags(childrenStr, 5);
-	else if (node->_token->_type == HEADING6) surroundHeadingTags(childrenStr, 6);
-	else if (node->_token->_type == BOLD) surroundBoldTags(childrenStr);
-	else if (node->_token->_type == ITALIC) surroundItalicTags(childrenStr);
-	else if (node->_token->_type == STRIKETHROUGH) surroundStrikethroughTags(childrenStr);
-	else surroundCodeTags(childrenStr);
+	switch (node->_token->_type) {
+		case HEADING1:
+			surroundHeadingTags(childrenStr, 1);
+			break;
+		case HEADING2:
+			surroundHeadingTags(childrenStr, 2);
+			break;
+		case HEADING3:
+			surroundHeadingTags(childrenStr, 3);
+			break;
+		case HEADING4:
+			surroundHeadingTags(childrenStr, 4);
+			break;
+		case HEADING5:
+			surroundHeadingTags(childrenStr, 5);
+			break;
+		case HEADING6:
+			surroundHeadingTags(childrenStr, 6);
+			break;
+		case BOLD:
+			surroundBoldTags(childrenStr);
+			break;
+		case ITALIC:
+			surroundItalicTags(childrenStr);
+			break;
+		case STRIKETHROUGH:
+			surroundStrikethroughTags(childrenStr);
+			break;
+		case INLINE_CODE:
+			surroundCodeTags(childrenStr);
+			break;
+		case MULTILINE_CODE:
+			// TODO Update surrounding tags for Multiline Code
+			surroundCodeTags(childrenStr);
+			break;
+		default:
+			cout << "Error: Unexpected Token\n";
+			break;
+	}
 	return childrenStr;
 }
 

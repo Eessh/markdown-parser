@@ -6,10 +6,42 @@
 
 using namespace std;
 
-int main() {
-	// string markdownStr = "##_A parser for Markdown Syntax_**Fast**and_Simple_";
-	// string markdownStr;
-	// getline(cin, markdownStr);
+int main(int argc, char* argv[]) {
+
+	Scanner scanner;
+	Renderer renderer;
+
+	if (argc > 1) {
+		if (argc > 2) {
+			cout << "Error: MarkdownParser accepts only 1 argument => Mardown String\n";
+			cout << "  Example: .\\MarkdownParser.exe \"#heading1\"\n";
+			cout << "  Output:  <h1>heading1</h1>\n";
+			return 0;
+		}
+		
+		string inputMarkdownString = argv[1];
+		string outputHTML = renderer
+												.renderAbstractSyntaxTree(
+													new AbstractSyntaxTree(
+														scanner.scan(inputMarkdownString)
+													)
+												);
+
+		cout << "  Markdown String: " << inputMarkdownString << "\n";
+		cout << "  HTML: " << outputHTML << "\n";
+		return 0;
+	}
+
+
+	// Help
+	cout << "\nUsage: MarkdownParser.exe <MarkdownString>\n\n";
+	cout << "  Simple Example:\n";
+	cout << "    Command: .\\MarkdownParser.exe \"#heading1\"\n";
+	cout << "    Output:  <h1>heading1</h1>\n\n";
+	cout << "  Complex Example:\n";
+	cout << "    Command: .\\MarkdownParser.exe \"##_A parser for Markdown Syntax_**Fast**and_Simple_\"\n";
+	cout << "    Output:  <h2><em>A parser for Markdown Syntax</em><b>Fast</b>and<em>Simple</em></h2>\n\n";
+
 	vector <string> markdownStrings = {
 		"#heading-1",
 		"##heading-2",
@@ -25,21 +57,14 @@ int main() {
 		"`some inline code`",
 		"```some multiline code```"
 	};
-	Scanner scanner;
-	Renderer renderer;
-	cout << "{" << endl;
-	for (string &str: markdownStrings) {
-		cout << "\tHTML: " << renderer.renderAbstractSyntaxTree(new AbstractSyntaxTree(scanner.scan(str))) << endl;
-	}
-	cout << "}" << endl;
 
-	string markdownStr = "##_A parser for Markdown Syntax_**Fast**and_Simple_";
-	string html = renderer
-								.renderAbstractSyntaxTree(
-									new AbstractSyntaxTree(
-										scanner.scan(markdownStr)
-									)
-								);
-	cout << "Complex HTML: " << html << endl;
+	cout << "Currently Supported: {" << endl;
+	for (string &str: markdownStrings) {
+		cout << "  " << str << " => " << renderer.renderAbstractSyntaxTree(new AbstractSyntaxTree(scanner.scan(str))) << endl;
+	}
+	cout << "}\n" << endl;
+
+	cout << "Github: https://github.com/Eessh/markdown-parser\n\n";
+
 	return 0;
 }
