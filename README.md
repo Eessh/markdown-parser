@@ -7,7 +7,7 @@ git clone https://github.com/Eessh/markdown-parser.git
 cd markdown-parser/
 make
 ```
-❗ Linux / macOS users should change the Makefile, see the last portion.
+❗ Linux / macOS users should change the [Makefile](https://github.com/Eessh/markdown-parser#TODO), see the last portion.
 
 ### Usage:
 - Windows
