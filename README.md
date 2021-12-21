@@ -7,7 +7,7 @@ git clone https://github.com/Eessh/markdown-parser.git
 cd markdown-parser/
 make
 ```
-❗ Linux / macOS users should change the [Makefile](https://github.com/Eessh/markdown-parser#TODO), see the last portion.
+❗ Linux / macOS users should change the [Makefile](#unixMakefile), see the last portion.
 
 ### Usage:
 - Windows
@@ -44,7 +44,7 @@ Example:
 - [ ] Images
 - [ ] Tables
 
-#### If you are on Unix based OS (Linux, macOS) you should be changing the Makefile:
+#### <a name="unixMakefile"></a> If you are on Unix based OS (Linux, macOS) you should be changing the Makefile:
 ```Makefile
 default:
 	g++ MarkdownParser.cpp src/*.cpp -o MarkdownParser
