@@ -47,17 +47,17 @@ Example:
 #### <a name="unixMakefile"></a> If you are on Unix based OS (Linux, macOS) you should be changing the Makefile:
 ```Makefile
 default:
-	g++ MarkdownParser.cpp src/*.cpp -o MarkdownParser
+	g++ MarkdownParser.cpp src/*.cpp -O3 -o MarkdownParser
 
 run:
 	./MarkdownParser
 
 build_run:
-	g++ MarkdownParser.cpp src/*.cpp -o MarkdownParser && ./MarkdownParser
+	g++ MarkdownParser.cpp src/*.cpp -O3 -o MarkdownParser && ./MarkdownParser
 
 clean:
 	rm ./MarkdownParser
 
 build_run_clean:
-	g++ MarkdownParser.cpp src/*.cpp -o MarkdownParser && ./MarkdownParser && rm ./MarkdownParser
+	g++ MarkdownParser.cpp src/*.cpp -O3 -o MarkdownParser && ./MarkdownParser && rm ./MarkdownParser
 ```
