@@ -1,5 +1,6 @@
 #include <iostream>
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
 #include "include/Scanner.h"
 #include "include/Renderer.h"
 #include "include/AbstractSyntaxTree.h"
