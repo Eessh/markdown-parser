@@ -20,12 +20,7 @@ int main(int argc, char* argv[]) {
 		}
 		
 		string inputMarkdownString = argv[1];
-		string outputHTML = renderer
-												.renderAbstractSyntaxTree(
-													new AbstractSyntaxTree(
-														scanner.scan(inputMarkdownString)
-													)
-												);
+		string outputHTML = renderer.renderAbstractSyntaxTree(new AbstractSyntaxTree(scanner.scan(inputMarkdownString)));
 
 		cout << "  Markdown String: " << inputMarkdownString << "\n";
 		cout << "  HTML: " << outputHTML << "\n";
