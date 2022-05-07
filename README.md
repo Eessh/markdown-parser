@@ -34,7 +34,7 @@ Example:
 - [x] Bold
 - [x] Italic
 - [x] Nested Bold and Italic
-- [ ] All Bold and Italic
+- [x] All Bold and Italic
 - [x] Strikethrough
 - [x] Inline Code
 - [ ] Multiline Code
