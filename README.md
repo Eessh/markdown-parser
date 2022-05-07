@@ -38,7 +38,7 @@ Example:
 - [x] Strikethrough
 - [x] Inline Code
 - [ ] Multiline Code
-- [ ] Quote
+- [x] Quote
 - [ ] Lists
 - [ ] Links
 - [ ] Images
