@@ -24,5 +24,6 @@ private:
 	void _handleUnderscore();
 	void _handleTilda();
 	void _handleBacktick();
+	void _handleQuote();
 	void _handleText();
 };

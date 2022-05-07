@@ -13,9 +13,7 @@ vector <Token*> Scanner::scan(const string &markdownStr) {
 		if (_str[_iteratorPos] == '_') _handleUnderscore();
 		if (_str[_iteratorPos] == '~') _handleTilda();
 		if (_str[_iteratorPos] == '`') _handleBacktick();
-	}
-	for (Token* t: _tokens) {
-		cout << t->toString() << " ";
+		if (_str[_iteratorPos] == '>') _handleQuote();
 	}
 	return _tokens;
 }
@@ -26,7 +24,8 @@ bool Scanner::_isSpecialChar() {
 			_str[_iteratorPos] == '*' ||
 			_str[_iteratorPos] == '_' ||
 			_str[_iteratorPos] == '~' ||
-			_str[_iteratorPos] == '`') return true;
+			_str[_iteratorPos] == '`' ||
+			_str[_iteratorPos] == '>') return true;
 	return false;
 }
 
@@ -84,6 +83,12 @@ void Scanner::_handleBacktick() {
 		_tokens.push_back(new Token(INLINE_CODE));
 		_iteratorPos += 1;
 	}
+	return;
+}
+
+void Scanner::_handleQuote() {
+	_tokens.push_back(new Token(QUOTE));
+	_iteratorPos += 1;
 	return;
 }
 

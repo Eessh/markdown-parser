@@ -83,6 +83,9 @@ string Renderer::recursiveASTRenderer(const AbstractSyntaxTreeNode* node) {
 			// TODO Update surrounding tags for Multiline Code
 			surroundCodeTags(childrenStr);
 			break;
+		case QUOTE:
+			surroundQuoteTags(childrenStr);
+			break;
 		default:
 			cout << "Error: Unexpected Token\n";
 			break;
@@ -125,5 +128,10 @@ void Renderer::surroundStrikethroughTags(string &_currentTextStr) {
 
 void Renderer::surroundCodeTags(string &_currentTextStr) {
 	_currentTextStr = "<code>" + _currentTextStr + "</code>";
+	return;
+}
+
+void Renderer::surroundQuoteTags(string &_currentTextStr) {
+	_currentTextStr = "<div class=\"quote\">" + _currentTextStr + "</div>";
 	return;
 }

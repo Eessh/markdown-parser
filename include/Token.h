@@ -18,6 +18,7 @@ typedef enum {
 	STRIKETHROUGH,
 	INLINE_CODE,
 	MULTILINE_CODE,
+	QUOTE,
 	TEXT
 } TokenType;
 
@@ -43,6 +44,7 @@ public:
 	bool isCode();
 	bool isInlineCode();
 	bool isMultilineCode();
+	inline bool isQuote() {return _type == QUOTE;}
 	bool isText();
 
 	string toString();

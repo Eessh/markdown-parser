@@ -27,4 +27,5 @@ private:
 	void surroundBoldAndItalicTags(string &_currentTextStr);
 	void surroundStrikethroughTags(string &_currentTextStr);
 	void surroundCodeTags(string &_currentTextStr);
+	void surroundQuoteTags(string &_currentTextStr);
 };
