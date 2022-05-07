@@ -14,6 +14,9 @@ vector <Token*> Scanner::scan(const string &markdownStr) {
 		if (_str[_iteratorPos] == '~') _handleTilda();
 		if (_str[_iteratorPos] == '`') _handleBacktick();
 	}
+	for (Token* t: _tokens) {
+		cout << t->toString() << " ";
+	}
 	return _tokens;
 }
 
@@ -43,12 +46,16 @@ void Scanner::_handleHashtag() {
 }
 
 void Scanner::_handleAsterisk() {
-	_iteratorPos += 1;
-	if (_str[_iteratorPos] == '*') {
+	if (_str[_iteratorPos+2] == '*') {
+		_tokens.push_back(new Token(BOLDnITALIC));
+		_iteratorPos += 2;
+	}
+	else if (_str[_iteratorPos+1] == '*') {
 		_tokens.push_back(new Token(BOLD));
 		_iteratorPos += 1;
 	}
 	else _tokens.push_back(new Token(ITALIC));
+	_iteratorPos += 1;
 	return;
 }
 

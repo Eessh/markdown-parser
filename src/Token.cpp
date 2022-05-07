@@ -48,6 +48,8 @@ bool Token::isItalic() {
 	return false;
 }
 
+inline bool Token::isBoldAndItalic() {return _type == BOLDnITALIC;}
+
 bool Token::isStrikethrough() {
 	if (_type == STRIKETHROUGH) return true;
 	return false;
@@ -90,6 +92,8 @@ string Token::toString() {
 			return "<BOLD>";
 		case ITALIC:
 			return "<ITALIC>";
+		case BOLDnITALIC:
+			return "<BOLDnITALIC>";
 		case STRIKETHROUGH:
 			return "<STRIKETHROUGH>";
 		case INLINE_CODE:

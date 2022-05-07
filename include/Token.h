@@ -14,6 +14,7 @@ typedef enum {
 	HEADING6,
 	BOLD,
 	ITALIC,
+	BOLDnITALIC,
 	STRIKETHROUGH,
 	INLINE_CODE,
 	MULTILINE_CODE,
@@ -37,6 +38,7 @@ public:
 	bool isHeading6();
 	bool isBold();
 	bool isItalic();
+	bool isBoldAndItalic();
 	bool isStrikethrough();
 	bool isCode();
 	bool isInlineCode();

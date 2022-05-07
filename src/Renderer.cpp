@@ -70,6 +70,9 @@ string Renderer::recursiveASTRenderer(const AbstractSyntaxTreeNode* node) {
 		case ITALIC:
 			surroundItalicTags(childrenStr);
 			break;
+		case BOLDnITALIC:
+			surroundBoldAndItalicTags(childrenStr);
+			break;
 		case STRIKETHROUGH:
 			surroundStrikethroughTags(childrenStr);
 			break;
@@ -107,6 +110,11 @@ void Renderer::surroundItalicTags(string &_currentTextStr) {
 
 void Renderer::surroundBoldTags(string &_currentTextStr) {
 	_currentTextStr = "<b>" + _currentTextStr + "</b>";
+	return;
+}
+
+void Renderer::surroundBoldAndItalicTags(string &_currentTextStr) {
+	_currentTextStr = "<em><b>" + _currentTextStr + "</b></em>";
 	return;
 }
 

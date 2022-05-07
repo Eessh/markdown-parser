@@ -22,8 +22,9 @@ private:
 	string recursiveASTRenderer(const AbstractSyntaxTreeNode* node);
 
 	void surroundHeadingTags(string &_currentTextStr, int tagNumber);
-	void surroundItalicTags(string &_currentTextStr);
 	void surroundBoldTags(string &_currentTextStr);
+	void surroundItalicTags(string &_currentTextStr);
+	void surroundBoldAndItalicTags(string &_currentTextStr);
 	void surroundStrikethroughTags(string &_currentTextStr);
 	void surroundCodeTags(string &_currentTextStr);
 };
