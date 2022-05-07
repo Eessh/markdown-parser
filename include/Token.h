@@ -19,7 +19,8 @@ typedef enum {
 	INLINE_CODE,
 	MULTILINE_CODE,
 	QUOTE,
-	TEXT
+	TEXT,
+	NEWLINE
 } TokenType;
 
 class Token {
