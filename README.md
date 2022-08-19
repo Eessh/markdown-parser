@@ -1,5 +1,9 @@
 # Markdown Parser
-A simple tool to parse the Mardown and, convert it to HTML.
+A header only library to parse Markdown to AST (Abstract Syntax Tree).
+
+> Header file `MarkdownParser.hpp` can be found in NewVersion, you may click [here](https://github.com/Eessh/markdown-parser/blob/master/NewVersion/MarkdownParser.hpp)
+
+Currently old code is being abstracted and moved to NewVersion. The HTML rendering part will be a plugin(`/NewVersion/plugins`).
 
 ### Build:
 ```bash
