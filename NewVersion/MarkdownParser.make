@@ -19,7 +19,7 @@ endif
 # #############################################
 
 RESCOMP = windres
-INCLUDES +=
+INCLUDES += -Iinclude
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -63,8 +63,20 @@ endif
 GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/AbstractSyntaxTree.o
+GENERATED += $(OBJDIR)/AbstractSyntaxTreeNode.o
+GENERATED += $(OBJDIR)/Lexer.o
+GENERATED += $(OBJDIR)/MarkdownDoc.o
 GENERATED += $(OBJDIR)/MarkdownParser.o
+GENERATED += $(OBJDIR)/Token.o
+GENERATED += $(OBJDIR)/TokenTypes.o
+OBJECTS += $(OBJDIR)/AbstractSyntaxTree.o
+OBJECTS += $(OBJDIR)/AbstractSyntaxTreeNode.o
+OBJECTS += $(OBJDIR)/Lexer.o
+OBJECTS += $(OBJDIR)/MarkdownDoc.o
 OBJECTS += $(OBJDIR)/MarkdownParser.o
+OBJECTS += $(OBJDIR)/Token.o
+OBJECTS += $(OBJDIR)/TokenTypes.o
 
 # Rules
 # #############################################
@@ -129,6 +141,24 @@ endif
 # #############################################
 
 $(OBJDIR)/MarkdownParser.o: MarkdownParser.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AbstractSyntaxTree.o: src/AbstractSyntaxTree.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AbstractSyntaxTreeNode.o: src/AbstractSyntaxTreeNode.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Lexer.o: src/Lexer.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MarkdownDoc.o: src/MarkdownDoc.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Token.o: src/Token.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/TokenTypes.o: src/TokenTypes.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

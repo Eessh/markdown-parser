@@ -12,7 +12,9 @@ workspace "MarkdownParser"
             Release version
             files { "**.hpp", "**.cpp" }
         ]]
-        files { "MarkdownParser.hpp", "MarkdownParser.cpp" }
+        files { "include/*.hpp", "**.cpp" }
+        removefiles { "plugins/**", "*.hpp" }
+        includedirs { "include" }
         filter "configurations:Debug"
             defines { "DEBUG" }
             symbols "On"
