@@ -21,7 +21,7 @@ make
 Example:
 > .\MarkdownParser.exe "###Hi, I'm __*Eessh*__"
 >   MarkdownString: "###Hi, I'm __*Eessh*__"
->   HTML: "<h4>Hi, I'm <b><em>Eessh</em></b></h4>"
+>   HTML: "<h3>Hi, I'm <b><em>Eessh</em></b></h3>"
 ```
 - Linux / macOS
 ```bash
@@ -30,7 +30,7 @@ Example:
 Example:
 > ./MarkdownParser "###Hi, I'm __*Eessh*__"
 >   MarkdownString: "###Hi, I'm __*Eessh*__"
->   HTML: "<h4>Hi, I'm <b><em>Eessh</em></b></h4>"
+>   HTML: "<h3>Hi, I'm <b><em>Eessh</em></b></h3>"
 ```
 
 #### TODO
