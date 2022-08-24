@@ -11,9 +11,14 @@ int main() {
     doc.load("C:/Users/Eessh/Documents/projects/markdown-parser/NewVersion/bin/Debug/Test.md");
     doc.log();
     Lexer l;
-    std::vector<Token> tokens = l.parseToTokens(s);
+    std::vector<Token> tokens = l.parseStrToTokens(s);
     for (const Token& t: tokens)
         t.log();
+    std::cout << "\n";
+    std::vector<Token> docTokens = l.parseDocToTokens(doc);
+    for (const Token& t: docTokens)
+        t.log();
+    
     AST t;
     t.load(tokens);
     return 0;

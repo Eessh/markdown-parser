@@ -7,11 +7,10 @@
 
 class MarkdownDoc {
   public:
+  std::vector<std::string> docData;
+  
   MarkdownDoc();
 
   void load(const std::string& filepath);
   void log();
-
-  private:
-  std::vector<std::string> docData;
 };

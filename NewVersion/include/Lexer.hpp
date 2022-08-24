@@ -5,16 +5,20 @@
 #include <vector>
 #include <stdexcept>
 #include "Token.hpp"
+#include "MarkdownDoc.hpp"
 
 class Lexer {
     public:
     Lexer();
 
-    const std::vector<Token>& parseToTokens(const std::string& source);
+    const std::vector<Token>& parseStrToTokens(const std::string& source);
+    const std::vector<Token>& parseDocToTokens(const MarkdownDoc& doc);
 
     private:
     std::vector<Token> _tokens;
     unsigned long long int _index;
+
+    void commonFunc(const std::string& source);
 
     bool specialChar(const char& c);
 
