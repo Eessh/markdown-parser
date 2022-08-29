@@ -16,7 +16,6 @@ const std::vector<Token>& Lexer::parseDocToTokens(const MarkdownDoc& doc) {
 	this->_tokens.clear();
 	this->_index = 0;
 	for (const std::string& line: doc.docData) {
-		std::cout << "Log: Line: " << line << "\n";
 		this->commonFunc(line);
 		this->_tokens.push_back(Token(NEWLINE));
 		this->_index = 0;
