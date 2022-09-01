@@ -1,0 +1,50 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"file_exclude_patterns": []
+		}
+	],
+	"settings": {
+		"tab_size": 2,
+		"font_face": "Fantasque Sans Mono",
+		"font_size": 14,
+		"caret_extra_top": 3,
+		"caret_extra_bottom": 5,
+		"caret_extra_width": 1,
+	},
+	"build_systems": [
+		{
+			"name": "Project Build System",
+			"working_dir": "$folder",
+			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+			"variants": [
+				{
+					"name": "Generate Makefiles using Premake5",
+					"shell_cmd": "start Runner.bat premake5.exe --cc=mingw gmake2"
+				},
+				{
+					"name": "Build: Debug",
+					"shell_cmd": "start Runner.bat mingw32-make"
+				},
+				{
+					"name": "Build: Release",
+					"shell_cmd": "start Runner.bat mingw32-make config=release"
+				},
+				{
+					"name": "Run: Debug",
+					"shell_cmd": "start Runner.bat .\\bin\\Debug\\MarkdownParser.exe"
+				},
+				{
+					"name": "Run: Release",
+					"shell_cmd": "start Runner.bat .\\bin\\Release\\MarkdownParser.exe"
+				},
+				{
+					"name": "Clean",
+					"shell_cmd": "start Runner.bat del /q \"obj\\Debug\\*.*\" && del /q \"obj\\Release\\*.*\" && del /q \"bin\\Debug\\MarkdownParser.exe\" && del /q \"bin\\Release\\MarkdownParser.exe\""
+				}
+			],
+		}
+	]
+}

@@ -1,4 +1,4 @@
-#include "../../MarkdownParser.hpp"
+#include "MarkdownParser.hpp"
 
 int main() {
   std::string markdown;

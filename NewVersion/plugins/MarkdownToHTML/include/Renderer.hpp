@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "../../../MarkdownParser.hpp"
+#include "../MarkdownParser.hpp"
 
 class Renderer {
   public:
