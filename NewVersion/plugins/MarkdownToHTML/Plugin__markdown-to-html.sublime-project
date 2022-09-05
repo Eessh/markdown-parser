@@ -34,15 +34,15 @@
 				},
 				{
 					"name": "Run: Debug",
-					"shell_cmd": "start Runner.bat .\\bin\\Debug\\MarkdownParser.exe"
+					"shell_cmd": "start Runner.bat .\\bin\\Debug\\Plugin__Markdown_to_HTML.exe"
 				},
 				{
 					"name": "Run: Release",
-					"shell_cmd": "start Runner.bat .\\bin\\Release\\MarkdownParser.exe"
+					"shell_cmd": "start Runner.bat .\\bin\\Release\\Plugin__Markdown_to_HTML.exe"
 				},
 				{
 					"name": "Clean",
-					"shell_cmd": "start Runner.bat del /q \"obj\\Debug\\*.*\" && del /q \"obj\\Release\\*.*\" && del /q \"bin\\Debug\\MarkdownParser.exe\" && del /q \"bin\\Release\\MarkdownParser.exe\""
+					"shell_cmd": "start Runner.bat del /q \"obj\\Debug\\*.*\" && del /q \"obj\\Release\\*.*\" && del /q \"bin\\Debug\\Plugin__Markdown_to_HTML.exe\" && del /q \"bin\\Release\\MarkdownParser.exe\""
 				}
 			],
 		}

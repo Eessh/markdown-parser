@@ -12,7 +12,7 @@ workspace "Plugin__Markdown_to_HTML"
             Release version
             files { "**.hpp", "**.cpp" }
         ]]
-        files { "include/*.hpp", "**.cpp", "MarkdownParser.hpp" }
+        files { "**.hpp", "**.cpp" }
         includedirs { "include" }
         filter "configurations:Debug"
             defines { "DEBUG" }
