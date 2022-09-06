@@ -7,8 +7,10 @@ class Renderer {
   public:
   Renderer();
 
-  std::string render(AST* ast);
+  std::string render(const AST* ast);
 
   private:
   ASTNode* iterator;
+
+  std::string recursiveASTRenderer(const AST* ast);
 };

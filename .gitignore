@@ -1,5 +1,5 @@
 .vscode
-MarkdownParser.exe
+**.exe
 MarkdownParser
 NewVersion/obj/Debug/**
 NewVersion/obj/Release/**

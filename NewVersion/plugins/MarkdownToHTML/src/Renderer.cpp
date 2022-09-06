@@ -4,6 +4,6 @@ Renderer::Renderer() {
   this->iterator = nullptr;
 }
 
-std::string Renderer::render(AST* ast) {
+std::string Renderer::render(const AST* ast) {
   return "";
 }

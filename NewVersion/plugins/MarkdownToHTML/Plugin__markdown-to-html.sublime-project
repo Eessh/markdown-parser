@@ -42,7 +42,7 @@
 				},
 				{
 					"name": "Clean",
-					"shell_cmd": "start Runner.bat del /q \"obj\\Debug\\*.*\" && del /q \"obj\\Release\\*.*\" && del /q \"bin\\Debug\\Plugin__Markdown_to_HTML.exe\" && del /q \"bin\\Release\\MarkdownParser.exe\""
+					"shell_cmd": "start Runner.bat del /q \"obj\\Debug\\*.*\" && del /q \"obj\\Release\\*.*\" && del /q \"bin\\Debug\\Plugin__Markdown_to_HTML.exe\" && del /q \"bin\\Release\\Plugin__Markdown_to_HTML.exe\""
 				}
 			],
 		}

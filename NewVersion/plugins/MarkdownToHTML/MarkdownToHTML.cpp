@@ -2,7 +2,8 @@
 
 int main() {
   MarkdownDoc doc;
-  doc.load("C:/Users/Eessh/Documents/projects/markdown-parser/NewVersion/plugins/MarkdownToHTML/bin/Debug/test.md");
+  // doc.load("C:/Users/Eessh/Documents/projects/markdown-parser/NewVersion/plugins/MarkdownToHTML/bin/Debug/test.md");
+  doc.load("C:/Users/Eessh/Documents/projects/markdown-parser/README.md");
   doc.log();
 
   Lexer lexer;

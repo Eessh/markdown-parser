@@ -99,6 +99,28 @@ class AST {
   
   void load(const std::vector<Token>& tokens);
 
+  // Iterators
+  class Iterator {
+  public:
+    Iterator() noexcept;
+
+  private:
+    const ASTNode* iterator;
+    std::stack<ASTNode*> iteratorHistory;
+  };
+
+
+  class RenderingIterator {
+  public:
+    RenderingIterator() noexcept;
+
+  private:
+    const ASTNode* iterator;
+    std::stack<ASTNode*> iteratorHistory;
+  };
+
+  RenderingIterator nextNodeToRender();
+
   private:
   ASTNode* _root;
   ASTNode* _iterator;
@@ -460,6 +482,16 @@ inline void AST::load(const std::vector<Token>& tokens) {
     }
   }
 }
+
+inline AST::RenderingIterator::RenderingIterator() noexcept {
+  this->iterator = nullptr;
+}
+
+inline RenderingIterator AST::rootNodeToRender() {
+  return RenderingIterator(this->_root);
+}
+
+inline RenderingIterator AST::nextNodeToRender() {}
 
 inline MarkdownDoc::MarkdownDoc() {};
 
