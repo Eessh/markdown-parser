@@ -41,7 +41,7 @@ Example:
 - [x] All Bold and Italic
 - [x] Strikethrough
 - [x] Inline Code
-- [ ] Multiline Code
+- [x] Multiline Code
 - [x] Quote
 - [ ] Lists
 - [ ] Links
