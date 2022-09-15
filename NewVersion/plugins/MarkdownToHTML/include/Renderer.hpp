@@ -7,10 +7,10 @@ class Renderer {
   public:
   Renderer();
 
-  std::string render(const AST* ast);
+  std::string render(const MarkdownParser::AST* ast);
 
   private:
-  ASTNode* iterator;
+  MarkdownParser::ASTNode* iterator;
 
-  std::string recursiveASTRenderer(const AST* ast);
+  std::string recursiveASTRenderer(const MarkdownParser::AST* ast);
 };

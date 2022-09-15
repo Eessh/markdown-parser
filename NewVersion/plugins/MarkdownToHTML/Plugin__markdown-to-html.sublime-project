@@ -21,28 +21,36 @@
 			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"variants": [
 				{
-					"name": "Generate Makefiles using Premake5",
-					"shell_cmd": "start Runner.bat premake5.exe --cc=mingw gmake2"
+					"name": "⚙️ Generate Makefiles using Premake5",
+					"shell_cmd": "premake5 --cc=gcc gmake2"
 				},
 				{
-					"name": "Build: Debug",
-					"shell_cmd": "start Runner.bat mingw32-make"
+					"name": "🛠️ Build: 🐞 Debug",
+					"shell_cmd": "make"
 				},
 				{
-					"name": "Build: Release",
-					"shell_cmd": "start Runner.bat mingw32-make config=release"
+					"name": "🛠️ Build: 🚀 Release",
+					"shell_cmd": "make config=release"
 				},
 				{
-					"name": "Run: Debug",
-					"shell_cmd": "start Runner.bat .\\bin\\Debug\\Plugin__Markdown_to_HTML.exe"
+					"name": " ▶️ Run: 🐞 Debug",
+					"shell_cmd": "time ./bin/Debug/Plugin__Markdown_to_HTML ../../../README.md"
 				},
 				{
-					"name": "Run: Release",
-					"shell_cmd": "start Runner.bat .\\bin\\Release\\Plugin__Markdown_to_HTML.exe"
+					"name": " ▶️ Run: 🚀 Release",
+					"shell_cmd": "time ./bin/Release/Plugin__Markdown_to_HTML ../../../README.md"
+				},
+				{
+					"name": "💩 Memory Leak Check: 🐞 Debug",
+					"shell_cmd": "valgrind -s --leak-check=full ./bin/Debug/Plugin__Markdown_to_HTML ../../../README.md"
+				},
+				{
+					"name": "💩 Memory Leak Check: 🚀 Release",
+					"shell_cmd": "valgrind -s --leak-check=full ./bin/Release/Plugin__Markdown_to_HTML ../../../README.md"
 				},
 				{
 					"name": "Clean",
-					"shell_cmd": "start Runner.bat del /q \"obj\\Debug\\*.*\" && del /q \"obj\\Release\\*.*\" && del /q \"bin\\Debug\\Plugin__Markdown_to_HTML.exe\" && del /q \"bin\\Release\\Plugin__Markdown_to_HTML.exe\""
+					"shell_cmd": "rm -rf ./obj/Debug ./obj/Release ./bin/Debug/Plugin__Markdown_to_HTML ./bin/Release/Plugin__Markdown_to_HTML"
 				}
 			],
 		}

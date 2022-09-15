@@ -1,12 +1,13 @@
 .vscode
 Makefile
-**.make
-**.exe
+*.make
+*.exe
 MarkdownParser
+Plugin__Markdown_to_HTML
 NewVersion/obj/Debug/**
 NewVersion/obj/Release/**
-**.o
-**.d
+*.o
+*.d
 NewVersion/bin/Debug/MarkdownParser.exe
 NewVersion/bin/Release/MarkdownParser.exe
 NewVersion/markdown-parser.sublime-workspace

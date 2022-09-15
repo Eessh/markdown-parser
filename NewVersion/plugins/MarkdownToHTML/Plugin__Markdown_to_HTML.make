@@ -21,7 +21,7 @@ endif
 RESCOMP = windres
 INCLUDES += -Iinclude
 FORCE_INCLUDE +=
-ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
+ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
 LIBS +=
 LDDEPS +=
@@ -35,7 +35,7 @@ endef
 
 ifeq ($(config),debug)
 TARGETDIR = bin/Debug
-TARGET = $(TARGETDIR)/Plugin__Markdown_to_HTML.exe
+TARGET = $(TARGETDIR)/Plugin__Markdown_to_HTML
 OBJDIR = obj/Debug
 DEFINES += -DDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g
@@ -44,7 +44,7 @@ ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),release)
 TARGETDIR = bin/Release
-TARGET = $(TARGETDIR)/Plugin__Markdown_to_HTML.exe
+TARGET = $(TARGETDIR)/Plugin__Markdown_to_HTML
 OBJDIR = obj/Release
 DEFINES += -DNDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2
@@ -104,7 +104,7 @@ ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
-	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) del /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 
@@ -131,10 +131,10 @@ endif
 # #############################################
 
 $(OBJDIR)/MarkdownToHTML.o: MarkdownToHTML.cpp
-	@echo $(notdir $<)
+	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Renderer.o: src/Renderer.cpp
-	@echo $(notdir $<)
+	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 -include $(OBJECTS:%.o=%.d)

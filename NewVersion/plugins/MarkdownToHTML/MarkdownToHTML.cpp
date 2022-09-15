@@ -1,19 +1,29 @@
 #include "MarkdownParser.hpp"
 
-int main() {
-  MarkdownDoc doc;
-  // doc.load("C:/Users/Eessh/Documents/projects/markdown-parser/NewVersion/plugins/MarkdownToHTML/bin/Debug/test.md");
-  doc.load("C:/Users/Eessh/Documents/projects/markdown-parser/README.md");
+int main(int args, char** argv) {
+
+  std::string filepath="";
+
+  if (args > 1) filepath = argv[1];
+  else {
+    std::cout << "Expected an argument: path to markdown document.\n";
+    std::cout << "Usage: Plugin__Markdown_to_HTML <path to markdown document>\n";
+    std::cout << "Example: Plugin__Markdown_to_HTML ./bin/Debug/test.md\n";
+    return 0;
+  }
+
+  MarkdownParser::MarkdownDoc doc;
+  doc.load(filepath);
   doc.log();
 
-  Lexer lexer;
-  std::vector<Token> tokens = lexer.parseDocToTokens(doc);
+  MarkdownParser::Lexer lexer;
+  std::vector<MarkdownParser::Token> tokens = lexer.parseDocToTokens(doc);
   
-  for (const Token& token: tokens)
+  for (const MarkdownParser::Token& token: tokens)
     token.log();
   std::cout << "\n";
   
-  AST ast;
+  MarkdownParser::AST ast;
   ast.load(tokens);
   
   return 0;
