@@ -13,9 +13,10 @@
 #ifndef MARKDOWN_PARSER
 #define MARKDOWN_PARSER
 
-/**
- * Includes
- */
+
+///////////////////////////////////////////////////////////////////////////////
+// * Includes
+///////////////////////////////////////////////////////////////////////////////
 #include <iostream>
 #include <vector>
 #include <string>
@@ -23,11 +24,16 @@
 #include <fstream>
 #include <stdexcept>
 
+
+///////////////////////////////////////////////////////////////////////////////
+// * MarkdownParser Namespace
+///////////////////////////////////////////////////////////////////////////////
 namespace MarkdownParser {
 
-  /**
-   * Prototypes
-   */
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * MArkdownDoc
+  /////////////////////////////////////////////////////////////////////////////
   class MarkdownDoc {
     public:
     std::vector<std::string> docData;
@@ -38,6 +44,10 @@ namespace MarkdownParser {
     void log();
   };
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * TokenType
+  /////////////////////////////////////////////////////////////////////////////
   typedef enum class TokenType {
     ROOT,
     HEADING,
@@ -50,6 +60,10 @@ namespace MarkdownParser {
   } TokenType;
   std::string tokenTypeToStr(const TokenType& type);
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * Token
+  /////////////////////////////////////////////////////////////////////////////
   class Token {
     public:
     Token(const TokenType& type);
@@ -70,6 +84,10 @@ namespace MarkdownParser {
     std::string _value;
   };
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * Lexer
+  /////////////////////////////////////////////////////////////////////////////
   class Lexer {
     public:
     Lexer();
@@ -95,6 +113,10 @@ namespace MarkdownParser {
     void handleText(const std::string& source);
   };
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * ASTNode (Abstract Syntax Tree Node)
+  /////////////////////////////////////////////////////////////////////////////
   class ASTNode {
     public:
     Token token;
@@ -107,6 +129,10 @@ namespace MarkdownParser {
     ASTNode* lastInsertedChild();
   };
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * AST (Abstract Syntax Tree)
+  /////////////////////////////////////////////////////////////////////////////
   class AST {
     public:
     AST();
@@ -145,8 +171,17 @@ namespace MarkdownParser {
 
 
 
-  /*
-   * Definitions
+  /////////////////////////////////////////////////////////////////////////////
+  // * TokenType Implementations
+  /////////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief Converts TokenType to string.
+   * 
+   * Example: TokenType::ROOT => "ROOT"
+   * 
+   * @param type token type(TokenType)
+   * @return string form of type
+   * @throws No exceptions
    */
   inline std::string tokenTypeToStr(const TokenType& type) {
     switch (type) {
@@ -170,6 +205,18 @@ namespace MarkdownParser {
     return "NEWLINE";
   }
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * Token Implementations
+  /////////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief Token constructor.
+   * 
+   * Token(const TokenType& type) should be used for tokens of type: ROOT, STRIKETHROUGH, QUOTE, NEWLINE.
+   * 
+   * @param type token type(TokenType)
+   * @throws No exceptions
+   */
   inline Token::Token(const TokenType& type) {
     if (
       type != TokenType::ROOT &&
@@ -182,6 +229,14 @@ namespace MarkdownParser {
     this->_type = type;
   }
 
+  /**
+   * @brief Token constructor.
+   * 
+   * Token(const TokenType& type, const unsigned short& level) should be used for tokens if type: HEADING, BOLD_ITALIC, CODE.
+   * 
+   * @param type token type(TokenType)
+   * @throws No exceptions
+   */
   inline Token::Token(const TokenType& type, const unsigned short& level) {
     if (
       type != TokenType::HEADING &&
@@ -194,6 +249,14 @@ namespace MarkdownParser {
     this->_level = level;
   }
 
+  /**
+   * @brief Token constructor.
+   * 
+   * Token(const TokenType& type, const std::string& value) should be used for tokens of type: TEXT.
+   * 
+   * @param type token type(TokenType)
+   * @throws No exceptions
+   */
   inline Token::Token(const TokenType& type, const std::string& value) {
     if (type != TokenType::TEXT) {
       throw std::runtime_error("Token only of type: TEXT can be initalized with type and value.");
@@ -202,10 +265,24 @@ namespace MarkdownParser {
     this->_value = value;
   }
 
+  /**
+   * @brief Returns type of token.
+   * 
+   * @return type (TokenType)
+   * @throws No exceptions
+   */
   inline TokenType Token::type() const {
     return this->_type;
   }
 
+  /**
+   * @brief Returns level of token.
+   * 
+   * This method is only applicable to tokens of type: HEADING, BOLD_ITALIC, CODE.
+   * 
+   * @return level (unsigned short)
+   * @throws Throws std::runtime_error, when accessing level of tokens of type: STRIKETHROUGH, QUOTE, TEXT, NEWLINE.
+   */
   inline unsigned short Token::level() const {
     if (
       this->_type != TokenType::HEADING &&
@@ -217,6 +294,14 @@ namespace MarkdownParser {
     return this->_level;
   }
 
+  /**
+   * @brief Returns value of token.
+   * 
+   * This method is only applicable to tokens of type: TEXT.
+   * 
+   * @return value (std::string)
+   * @throws Throws std::runtime_error, when accessing value of tokens of type: ROOT, HEADING, BOLD_ITALIC, STRIKETHROUGH, CODE, QUOTE, NEWLINE.
+   */
   inline std::string Token::value() const {
     if (this->_type != TokenType::TEXT) {
       throw std::runtime_error("Value can only be accessed in token of type: TEXT.");
@@ -224,6 +309,13 @@ namespace MarkdownParser {
     return this->_value;
   }
 
+  /**
+   * @brief Checks if two Tokens are equal.
+   * 
+   * @param token A const reference to a Token, which is being compared with this.
+   * @return true if two Tokens are equal.
+   * @throws No exceptions
+   */
   inline bool Token::operator == (const Token& token) {
     if (this->_type == token.type()) {
       switch (this->_type) {
@@ -252,42 +344,55 @@ namespace MarkdownParser {
     return false;
   }
 
+  /**
+   * @brief Logs token to stdout.
+   * 
+   * Example:
+   * 1) If token is of type ROOT, <ROOT> will be logged.
+   * 2) If token is of type HEADING, with level 3; <HEADING 3> will be logged.
+   * 
+   * @return void
+   * @throws No exceptions
+   */
   inline void Token::log() const {
     switch (this->_type) {
-      case TokenType::TEXT:
-        std::cout << "<TEXT '" << this->_value << "'>";
+      case TokenType::TEXT: {
+        std::cout << "<TEXT '" << this->_value << ">";
         break;
+      }
       case TokenType::HEADING:
-        std::cout << "<HEADING " << this->_level << ">";
-        break;
       case TokenType::BOLD_ITALIC:
-        std::cout << "<BOLD_ITALIC " << this->_level << ">";
+      case TokenType::CODE: {
+        std::cout << "<" << tokenTypeToStr(this->_type) << " " << this->_level << ">";
         break;
-      case TokenType::CODE:
-        std::cout << "<CODE " << this->_level << ">";
+      }
+      default: {
+        std::cout << "<" << tokenTypeToStr(this->_type) << ">";
         break;
-      case TokenType::ROOT:
-        std::cout << "<ROOT>";
-        break;
-      case TokenType::STRIKETHROUGH:
-        std::cout << "<STRIKETHROUGH>";
-        break;
-      case TokenType::QUOTE:
-        std::cout << "<QUOTE>";
-        break;
-      case TokenType::NEWLINE:
-        std::cout << "<NEWLINE>";
-        break;
-      default:
-        break;
+      }
     }
   }
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * Lexer Implementations
+  /////////////////////////////////////////////////////////////////////////////
+  /**
+   * @brief Default Constructor
+   * 
+   * @return void
+   * @throws No exceptions
+   */
   inline Lexer::Lexer() {
-    this->_tokens = std::vector<Token>();
     this->_index = 0;
   }
 
+  /**
+   * @brief Parses markdown string to tokens.
+   * 
+   * @return Const reference to a vector of tokens.
+   * @throws No exceptions
+   */
   inline const std::vector<Token>& Lexer::parseStrToTokens(const std::string& source) {
     this->_tokens.clear();
     this->_index = 0;
@@ -295,6 +400,12 @@ namespace MarkdownParser {
     return this->_tokens;
   }
 
+  /**
+   * @brief Parses markdown document (MarkdownDoc) to tokens.
+   * 
+   * @return Const reference to a vector of tokens.
+   * @throws No exceptions
+   */
   inline const std::vector<Token>& Lexer::parseDocToTokens(const MarkdownDoc& doc) {
     this->_tokens.clear();
     this->_index = 0;
@@ -307,6 +418,14 @@ namespace MarkdownParser {
     return this->_tokens;
   }
 
+  /**
+   * @brief This is the underlying function for MarkdownParser::Lexer::parseStrToTokens, MarkdownParser::Lexer::parseDocToTokens.
+   * 
+   * This function's job is to parse a markdown string to tokens, updates the iterator through source string, and parses into Tokens, at the same time.
+   * 
+   * @return Const reference to a vector of tokens.
+   * @throws No exceptions
+   */
   inline void Lexer::commonFunc(const std::string& source) {
     while (this->_index < source.size()) {
       this->handleHash(source);
@@ -320,6 +439,16 @@ namespace MarkdownParser {
     }
   }
 
+  /**
+   * @brief Checks whether an encountered character is a special character.
+   * 
+   * Special Charaters: '#', '*', '_', '~', '`', '>', '\n'
+   * 
+   * This function's job is to parse a markdown string to tokens, updates the iterator through source string, and parses into Tokens, at the same time.
+   * 
+   * @return boolean
+   * @throws No exceptions
+   */
   inline bool Lexer::specialChar(const char& c) {
     if (
       c == '#' ||
@@ -452,6 +581,10 @@ namespace MarkdownParser {
     this->_tokens.push_back(Token(TokenType::TEXT, source.substr(initIndex, length)));
   }
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * ASTNode (Abstract Syntax Tree Node) Implementations
+  /////////////////////////////////////////////////////////////////////////////
   inline ASTNode::ASTNode(const Token& token): token(token) {}
 
   inline ASTNode::~ASTNode() {
@@ -470,6 +603,10 @@ namespace MarkdownParser {
     return this->children.back();
   }
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * AST Implementations
+  /////////////////////////////////////////////////////////////////////////////
   inline AST::AST() {
     this->_root = new ASTNode(Token(TokenType::ROOT));
   }
@@ -512,6 +649,10 @@ namespace MarkdownParser {
 
   // inline RenderingIterator AST::nextNodeToRender() {}
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // * MarkdownDoc Implementations
+  /////////////////////////////////////////////////////////////////////////////
   inline MarkdownDoc::MarkdownDoc() {};
 
   inline void MarkdownDoc::load(const std::string& filepath) {
@@ -534,6 +675,6 @@ namespace MarkdownParser {
     }
   }
 
-}
+}   // Namespace: MarkdownParser
 
 #endif  // MARKDOWN_PARSER
