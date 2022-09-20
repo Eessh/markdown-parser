@@ -1,4 +1,5 @@
 #include "MarkdownParser.hpp"
+#include "Renderer.hpp"
 
 int main(int args, char** argv) {
 
@@ -25,6 +26,10 @@ int main(int args, char** argv) {
   
   MarkdownParser::AST ast;
   ast.load(tokens);
+
+  Renderer r;
+  std::string html = r.render(&ast);
+  std::cout << "HTML:\n" << html << "\n";
   
   return 0;
 }

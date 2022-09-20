@@ -8,6 +8,5 @@ NewVersion/obj/Debug/**
 NewVersion/obj/Release/**
 *.o
 *.d
-NewVersion/bin/Debug/MarkdownParser.exe
-NewVersion/bin/Release/MarkdownParser.exe
 NewVersion/markdown-parser.sublime-workspace
+NewVersion/plugins/MarkdownToHTML/Plugin__markdown-to-html.sublime-workspace

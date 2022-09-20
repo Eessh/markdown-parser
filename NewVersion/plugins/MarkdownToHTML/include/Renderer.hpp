@@ -12,5 +12,10 @@ class Renderer {
   private:
   MarkdownParser::ASTNode* iterator;
 
-  std::string recursiveASTRenderer(const MarkdownParser::AST* ast);
+  std::string recursiveASTRenderer(const MarkdownParser::ASTNode* node);
+  void handleHeadings(std::string& contentStr, const unsigned short& level);
+  void handleBoldItalic(std::string& contentStr, const unsigned short& level);
+  void handleCode(std::string& contentStr, const unsigned short& level);
+  void handleStrikethrough(std::string& contentStr);
+  void handleQuote(std::string& contentStr);
 };

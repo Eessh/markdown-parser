@@ -137,6 +137,8 @@ namespace MarkdownParser {
     public:
     AST();
     ~AST();
+
+    const ASTNode* root() const;
     
     void load(const std::vector<Token>& tokens);
 
@@ -444,8 +446,6 @@ namespace MarkdownParser {
    * 
    * Special Charaters: '#', '*', '_', '~', '`', '>', '\n'
    * 
-   * This function's job is to parse a markdown string to tokens, updates the iterator through source string, and parses into Tokens, at the same time.
-   * 
    * @return boolean
    * @throws No exceptions
    */
@@ -614,6 +614,10 @@ namespace MarkdownParser {
   inline AST::~AST() {
     delete(this->_root);
     // delete(this->_iterator);
+  }
+
+  inline const ASTNode* AST::root() const {
+    return this->_root;
   }
 
   inline void AST::load(const std::vector<Token>& tokens) {
