@@ -5,6 +5,9 @@ A header only library to parse Markdown to AST (Abstract Syntax Tree).
 
 Currently old code is being abstracted and moved to NewVersion. The HTML rendering part will be a plugin(`/NewVersion/plugins/MarkdownToHTML`).
 
+Coming to the good part, there are no memory leaks, checked with [Valgrind](https://valgrind.org/) tool.
+![No memory leaks](./NewVersion/plugins/MarkdownToHTML/images/ZeroMemoryLeaks.png)
+
 ### Build:
 ```bash
 git clone https://github.com/Eessh/markdown-parser.git
