@@ -55,6 +55,8 @@ namespace MarkdownParser {
     STRIKETHROUGH,
     CODE,
     QUOTE,
+    LINK,
+    IMAGE,
     TEXT,
     NEWLINE
   } TokenType;
@@ -74,6 +76,9 @@ namespace MarkdownParser {
     unsigned short level() const;
     std::string value() const;
 
+    unsigned long long startIndex() const;
+    unsigned long long endIndex() const;
+
     bool operator == (const Token& token);
 
     void log() const;
@@ -82,6 +87,8 @@ namespace MarkdownParser {
     TokenType _type;
     unsigned short _level;
     std::string _value;
+    unsigned long long _startIndex;
+    unsigned long long _endIndex;
   };
 
 
@@ -110,6 +117,8 @@ namespace MarkdownParser {
     void handleBacktick(const std::string& source);
     void handleGreater(const std::string& source);
     void handleNewline(const std::string& source);
+    void handleOpenSquaredBracket(const std::string& source);
+    void handleExclamation(const std::string& source);
     void handleText(const std::string& source);
   };
 
@@ -323,7 +332,9 @@ namespace MarkdownParser {
       switch (this->_type) {
         case TokenType::TEXT: {
           if (this->_value == token.value()) {
+            #ifdef DEBUG
             std::cout << "Log: Returning true\n";
+            #endif
             return true;
           }
           return false;
@@ -332,13 +343,17 @@ namespace MarkdownParser {
         case TokenType::BOLD_ITALIC:
         case TokenType::CODE: {
           if (this->_level == token.level()) {
+            #ifdef DEBUG
             std::cout << "Log: Returning true\n";
+            #endif
             return true;
           }
           return false;
         }
         default: {
+          #ifdef DEBUG
           std::cout << "Log: Returning true\n";
+          #endif
           return true;
         }
       }
@@ -566,6 +581,10 @@ namespace MarkdownParser {
     }
   }
 
+  inline void Lexer::handleOpenSquaredBracket(const std::string& source) {}
+  
+  inline void Lexer::handleExclamation(const std::string& source) {}
+
   inline void Lexer::handleText(const std::string& source) {
     if (this->_index >= source.size()) {
       return;
@@ -624,8 +643,10 @@ namespace MarkdownParser {
     this->_iterator = this->_root;
     this->_iteratorHistory.push(this->_root);
     for (const Token& token: tokens) {
+      #ifdef DEBUG
       std::cout << "Log: Token: "; token.log();
       std::cout << "\nLog: Last Token: "; this->_iterator->token.log(); std::cout << "\n";
+      #endif
       if (
         this->_iteratorHistory.top()->token == token ||
         this->_iteratorHistory.top()->token.type()==TokenType::HEADING && token.type()==TokenType::NEWLINE

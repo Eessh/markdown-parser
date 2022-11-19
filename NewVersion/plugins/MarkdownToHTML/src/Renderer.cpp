@@ -84,6 +84,10 @@ std::string Renderer::recursiveASTRenderer(const MarkdownParser::ASTNode* node) 
       contentStr = node->token.value();
       break;
     }
+    case MarkdownParser::TokenType::NEWLINE: {
+      contentStr = "<br>";
+      break;
+    }
     default: {
       #ifdef DEBUG
       std::cout << "Error: Encountered a token of type: " << MarkdownParser::tokenTypeToStr(node->token.type()) << ", which is not renderable.\n";
